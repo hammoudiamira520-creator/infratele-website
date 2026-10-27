@@ -4,285 +4,712 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INFRATELE SPA | Connecting the Future</title>
+<title>INFRATELE - Connecting the Future</title>
+
 <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
-  --navy: #071525;
-  --panel: #0e2135;
-  --cyan: #00d4e8;
-  --orange: #ff7a1a;
-  --white: #f4f8ff;
-  --muted: #a9bacb;
+    --background: #03131e;
+    --cyan: #20dce8;
+    --orange: #ff841f;
+    --white: #f3f7fb;
+    --muted: #b5c9d4;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--navy);
-  color: var(--white);
-  line-height: 1.6;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--white);
+    background: var(--background);
+    overflow-x: hidden;
 }
+
+/* NAVIGATION BAR */
+
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 22px 8%;
-  border-bottom: 1px solid #ffffff18;
+    height: 92px;
+    padding: 0 5.2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border-bottom: 1px solid #16404b;
+    background: rgba(3, 19, 30, 0.96);
+    position: relative;
+    z-index: 10;
 }
-.logo { font-size: 25px; font-weight: 800; letter-spacing: 2px; }
-.logo span { color: var(--cyan); }
-nav { display: flex; gap: 24px; flex-wrap: wrap; }
-nav a { color: var(--white); text-decoration: none; font-size: 14px; }
-nav a:hover { color: var(--orange); }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 52px;
+}
+
+.logo-text h2 {
+    font-size: 29px;
+    letter-spacing: 1px;
+    font-weight: 900;
+}
+
+.logo-text sup {
+    font-size: 13px;
+}
+
+.logo-text p {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+nav a {
+    color: #d8e4eb;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--cyan);
+}
+
+.contact-button {
+    color: var(--cyan);
+    text-decoration: none;
+    border: 1px solid #176778;
+    border-radius: 30px;
+    padding: 13px 18px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.contact-button:hover {
+    background: #0b3544;
+    box-shadow: 0 0 20px #20dce822;
+}
+
+/* MAIN INTERFACE */
+
 .hero {
-  min-height: 490px;
-  padding: 85px 8%;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
-  gap: 40px;
-  background:
-    radial-gradient(ellipse at 80% 40%, #00d4e817, transparent 50%),
-    var(--navy);
+    min-height: calc(100vh - 92px);
+    padding: 55px 5.2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 85% 15%,
+        #073846 0%, transparent 43%),
+        linear-gradient(120deg, #03131e, #041d29);
 }
-.tag {
-  color: var(--orange);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-size: 12px;
-  font-weight: bold;
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    right: 8%;
+    top: 10%;
+    background: #00d9ef08;
+    filter: blur(50px);
+    border-radius: 50%;
+    z-index: -1;
 }
-h1 { font-size: clamp(38px, 5vw, 66px); line-height: 1.08; margin: 18px 0; }
-h1 span { color: var(--cyan); }
-.hero p, .section-intro { color: var(--muted); max-width: 560px; }
-.btn {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 12px 22px;
-  background: var(--orange);
-  color: #101827;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: transform .25s, box-shadow .25s;
+
+/* LEFT SIDE */
+
+.hero-content {
+    z-index: 2;
+    animation: appear 1s ease both;
 }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px #ff7a1a55; }
-.network {
-  min-height: 280px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #00d4e83d;
-  border-radius: 18px;
-  background: linear-gradient(145deg, #102b42, #071525);
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    color: var(--cyan);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 27px;
 }
-.network::before, .network::after {
-  content: "";
-  position: absolute;
-  width: 230px;
-  height: 230px;
-  border: 1px dashed #00d4e85c;
-  border-radius: 50%;
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  animation: rotate 18s linear infinite;
+
+.eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 3px;
+    background: var(--orange);
 }
-.network::after {
-  width: 160px; height: 160px;
-  border-color: #ff7a1a88;
-  animation-direction: reverse;
+
+h1 {
+    font-size: clamp(38px, 4.7vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -1.7px;
+    font-weight: 900;
 }
+
+h1 span {
+    color: var(--cyan);
+}
+
+.description {
+    margin-top: 25px;
+    margin-bottom: 32px;
+    max-width: 450px;
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 25px;
+    border-radius: 35px;
+    background: linear-gradient(110deg, #ff781a, #ffa13c);
+    color: #071723;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.primary-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px #ff841f40;
+}
+
+.primary-button span {
+    font-size: 20px;
+}
+
+.secondary-button {
+    color: #dce8ed;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+}
+
+.secondary-button:hover {
+    color: var(--cyan);
+}
+
+/* RIGHT SIDE: ANIMATED NETWORK */
+
+.visual {
+    position: relative;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: appear 1.2s ease both;
+}
+
+.network-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* CENTRAL ORBIT */
+
+.orbit {
+    position: absolute;
+    width: min(27vw, 340px);
+    aspect-ratio: 1;
+    border: 1px solid #13c8dc35;
+    border-radius: 50%;
+    animation: orbitGlow 5s ease-in-out infinite;
+}
+
+.orbit::before {
+    content: "";
+    position: absolute;
+    inset: 12%;
+    border: 1px dashed #20dce855;
+    border-radius: 50%;
+    transform: rotateX(65deg) rotate(25deg);
+}
+
+.orbit::after {
+    content: "";
+    position: absolute;
+    inset: 25%;
+    border: 1px solid #20dce888;
+    border-radius: 35%;
+    transform: rotate(45deg);
+    box-shadow: 0 0 30px #20dce81a;
+}
+
 .core {
-  position: absolute;
-  left: 50%; top: 50%;
-  width: 68px; height: 68px;
-  transform: translate(-50%, -50%);
-  display: grid; place-items: center;
-  border-radius: 50%;
-  color: var(--navy);
-  background: var(--cyan);
-  box-shadow: 0 0 35px #00d4e880;
-  font-size: 25px;
-  animation: pulse 2s ease-in-out infinite;
-  z-index: 2;
+    width: 64px;
+    height: 64px;
+    position: relative;
+    z-index: 2;
+    animation: float 4s ease-in-out infinite;
 }
-.node {
-  position: absolute;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--orange);
-  box-shadow: 0 0 18px var(--orange);
-  animation: pulse 1.8s ease-in-out infinite;
+
+.core svg {
+    width: 100%;
+    height: 100%;
 }
-.n1 { top: 20%; left: 23%; }
-.n2 { top: 25%; right: 19%; animation-delay: .5s; }
-.n3 { bottom: 18%; left: 25%; animation-delay: .8s; }
-.n4 { bottom: 20%; right: 23%; animation-delay: 1s; }
-section { padding: 65px 8%; }
-.section-title { font-size: 32px; margin: 8px 0; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 32px;
+
+/* FLOATING LABELS */
+
+.tech-label {
+    position: absolute;
+    padding: 13px;
+    min-width: 115px;
+    border: 1px solid #08718599;
+    border-radius: 13px;
+    background: rgba(3, 25, 38, 0.94);
+    box-shadow: 0 8px 25px #0002;
+    font-size: 11px;
+    animation: float 5s ease-in-out infinite;
+    transition: border-color 0.3s, background 0.3s;
+    z-index: 3;
 }
-.card {
-  padding: 26px;
-  border: 1px solid #ffffff17;
-  border-radius: 12px;
-  background: var(--panel);
-  transition: transform .25s, border-color .25s;
+
+.tech-label:hover {
+    border-color: var(--cyan);
+    background: #073142;
 }
-.card:hover { transform: translateY(-6px); border-color: var(--cyan); }
-.icon { font-size: 32px; }
-.card h3 { color: var(--cyan); }
-.card p { color: var(--muted); font-size: 14px; }
-.about {
-  background: #0b1c2d;
-  border-top: 1px solid #ffffff12;
-  border-bottom: 1px solid #ffffff12;
+
+.tech-label strong {
+    display: block;
+    white-space: nowrap;
 }
-.about-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 35px;
-  align-items: center;
+
+.tech-label p {
+    color: #91acba;
+    font-size: 9px;
+    margin-top: 7px;
 }
-.stat {
-  border-left: 3px solid var(--orange);
-  padding: 10px 20px;
-  color: var(--muted);
+
+.label-one {
+    top: 55px;
+    left: 5%;
 }
-.stat strong { display: block; color: var(--white); font-size: 20px; }
-.contact { text-align: center; }
-footer {
-  padding: 25px 8%;
-  text-align: center;
-  color: var(--muted);
-  border-top: 1px solid #ffffff18;
-  font-size: 13px;
+
+.label-two {
+    top: 75px;
+    right: 0;
+    animation-delay: -1s;
 }
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .45; }
+
+.label-three {
+    bottom: 75px;
+    left: 5%;
+    animation-delay: -2s;
 }
-@keyframes rotate {
-  from { rotate: 0deg; }
-  to { rotate: 360deg; }
+
+.label-four {
+    bottom: 55px;
+    right: 0;
+    animation-delay: -3s;
 }
-@media (max-width: 750px) {
-  header { flex-direction: column; }
-  .hero, .about-box { grid-template-columns: 1fr; padding-top: 55px; }
-  .cards { grid-template-columns: 1fr; }
-  nav { justify-content: center; }
+
+.cyan {
+    color: var(--cyan);
 }
+
+.orange {
+    color: var(--orange);
+}
+
+/* ANIMATIONS */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -9px;
+    }
+}
+
+@keyframes orbitGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px #20dce808;
+    }
+    50% {
+        box-shadow: 0 0 45px #20dce81a;
+    }
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 1000px) {
+    header {
+        padding: 0 3%;
+        gap: 15px;
+    }
+
+    nav {
+        gap: 17px;
+    }
+
+    .logo-text h2 {
+        font-size: 23px;
+    }
+
+    .hero {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .visual {
+        height: 400px;
+    }
+
+    .tech-label {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 720px) {
+    header {
+        min-height: 85px;
+        height: auto;
+        padding: 15px 5%;
+        flex-wrap: wrap;
+    }
+
+    .logo-icon {
+        width: 38px;
+        height: 43px;
+    }
+
+    .logo-text h2 {
+        font-size: 22px;
+    }
+
+    .logo-text p {
+        font-size: 8px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+
+    .contact-button {
+        padding: 10px;
+        font-size: 9px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 55px 6% 25px;
+    }
+
+    h1 {
+        font-size: clamp(38px, 9vw, 56px);
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    .visual {
+        height: 350px;
+        margin-top: 10px;
+    }
+
+    .orbit {
+        width: min(62vw, 280px);
+    }
+
+    .label-one {
+        left: 0;
+        top: 20px;
+    }
+
+    .label-two {
+        right: 0;
+        top: 30px;
+    }
+
+    .label-three {
+        left: 0;
+        bottom: 30px;
+    }
+
+    .label-four {
+        right: 0;
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .contact-button {
+        display: none;
+    }
+
+    .eyebrow {
+        gap: 7px;
+        letter-spacing: 1px;
+    }
+
+    .tech-label {
+        min-width: 0;
+        padding: 9px;
+        font-size: 9px;
+    }
+
+    .tech-label p {
+        font-size: 8px;
+    }
+
+    .buttons {
+        gap: 15px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }
 </style>
 </head>
+
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="logo">INFRA<span>TELE</span> <small>SPA</small></div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#solutions">Solutions</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <a class="logo" href="#home" aria-label="INFRATELE home">
+        <svg class="logo-icon" viewBox="0 0 70 70">
+            <path d="M7 53C15 26 31 10 57 7c8-1 10 5 3 10C39 23 26 37 18 58c-4 9-15 5-11-5Z" fill="#12dce5"/>
+            <path d="M20 59C28 36 42 22 62 18c5-1 6 4 0 8-15 6-24 17-31 35-4 7-14 5-11-2Z" fill="#05aebf"/>
+            <path d="M33 59C39 42 50 31 64 28c4-1 4 3 0 6-10 5-16 13-21 27-3 6-13 4-10-2Z" fill="#ff7a16"/>
+            <path d="M43 59C48 47 56 40 66 38c3-1 3 3 0 5-6 3-10 9-13 18-3 5-12 3-10-2Z" fill="#23dce7"/>
+        </svg>
+
+        <div class="logo-text">
+            <h2>INFRATELE<sup>®</sup></h2>
+            <p>Telecommunications &amp; Energy Infrastructure</p>
+        </div>
+    </a>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="contact-button" href="mailto:contact@example.com">
+        LET'S CONNECT ↗
+    </a>
 </header>
 
-<main>
-  <section class="hero" id="home">
-    <div>
-      <div class="tag">Telecommunications · Infrastructure</div>
-      <h1>Beyond the Signal.<br><span>Into the Future.</span></h1>
-      <p>
-        Connecting infrastructure, people and possibilities
-        through telecommunications technology and intelligent networks.
-      </p>
-      <a class="btn" href="#solutions">Explore Our Solutions ↗</a>
-    </div>
-    <div class="network" aria-label="Animated network illustration">
-      <div class="core">✦</div>
-      <div class="node n1"></div>
-      <div class="node n2"></div>
-      <div class="node n3"></div>
-      <div class="node n4"></div>
-    </div>
-  </section>
+<!-- HERO INTERFACE -->
+<main class="hero" id="home">
 
-  <section id="solutions">
-    <div class="tag">What connects us</div>
-    <h2 class="section-title">Our Technology Universe</h2>
-    <p class="section-intro">
-      Exploring the technologies that keep communication moving.
-    </p>
-    <div class="cards">
-      <article class="card">
-        <div class="icon">⌁</div>
-        <h3>Fibre Optics</h3>
-        <p>High-speed optical communication and fibre infrastructure
-        for reliable data transmission.</p>
-      </article>
-      <article class="card">
-        <div class="icon">⌁</div>
-        <h3>Wireless Networks</h3>
-        <p>Wireless communication concepts, radio links and
-        connectivity across distances.</p>
-      </article>
-      <article class="card">
-        <div class="icon">⌘</div>
-        <h3>Network Systems</h3>
-        <p>Connected systems and network infrastructure designed
-        to support communication services.</p>
-      </article>
-    </div>
-  </section>
+    <section class="hero-content">
+        <div class="eyebrow">
+            INFRASTRUCTURE <span>•</span>
+            TELECOMMUNICATIONS <span>•</span> ENERGY
+        </div>
 
-  <section class="about" id="about">
-    <div class="about-box">
-      <div>
-        <div class="tag">Our vision</div>
-        <h2 class="section-title">A more connected world.</h2>
-        <p class="section-intro">
-          Communication infrastructure brings people, businesses
-          and technologies closer together. Innovation begins with
-          a reliable connection.
+        <h1>
+            CONNECTING<br>
+            THE TERRITORY.<br>
+            <span>BUILDING THE<br>FUTURE.</span>
+        </h1>
+
+        <p class="description">
+            Intelligent infrastructure. Seamless connectivity.
+            A stronger, more connected tomorrow.
         </p>
-      </div>
-      <div class="stat">
-        <strong>Connect.</strong>
-        Build pathways for information to travel.
-        <strong>Innovate.</strong>
-        Explore new possibilities in communication.
-        <strong>Advance.</strong>
-        Move toward a more connected future.
-      </div>
-    </div>
-  </section>
 
-  <section class="contact" id="contact">
-    <div class="tag">Stay connected</div>
-    <h2 class="section-title">The future starts with a signal.</h2>
-    <p class="section-intro" style="margin: 0 auto;">
-      Telecommunications connects today's ideas with tomorrow's possibilities.
-    </p>
-    <a class="btn" href="#home">Back to Top ↑</a>
-  </section>
+        <div class="buttons">
+            <a href="#expertise" class="primary-button">
+                Explore Our Expertise <span>→</span>
+            </a>
+
+            <a href="#about" class="secondary-button">
+                Discover INFRATELE ↗
+            </a>
+        </div>
+    </section>
+
+    <!-- ANIMATED ILLUSTRATION -->
+    <section class="visual" aria-label="Animated network illustration">
+
+        <canvas class="network-canvas" id="network"></canvas>
+
+        <div class="orbit"></div>
+
+        <div class="core">
+            <svg viewBox="0 0 100 100" fill="none">
+                <path d="M50 10 82 28v38L50 84 18 66V28L50 10Z"
+                    stroke="#20dce8" stroke-width="3"/>
+                <path d="M50 30 67 40v20L50 70 33 60V40L50 30Z"
+                    stroke="#20dce8" stroke-width="3"/>
+                <path d="M50 10v20M82 28 67 40M82 66 67 60M50 84V70M18 66 33 60M18 28 33 40"
+                    stroke="#20dce8" stroke-width="3"/>
+                <circle cx="50" cy="50" r="8" fill="#ff841f"/>
+                <circle cx="50" cy="50" r="3" fill="#20dce8"/>
+            </svg>
+        </div>
+
+        <div class="tech-label label-one">
+            <strong><span class="cyan">◈</span> Fiber Optics</strong>
+            <p>Ultra-fast connectivity</p>
+        </div>
+
+        <div class="tech-label label-two">
+            <strong><span class="cyan">◉</span> Radio Networks</strong>
+            <p>Connected everywhere</p>
+        </div>
+
+        <div class="tech-label label-three">
+            <strong><span class="orange">△</span> Smart Infrastructure</strong>
+            <p>Designed to perform</p>
+        </div>
+
+        <div class="tech-label label-four">
+            <strong><span class="cyan">◎</span> Microwave Links</strong>
+            <p>Stable transmission</p>
+        </div>
+
+    </section>
+
 </main>
 
-<footer>
-  <p>INFRATELE SPA · Telecommunications Concept Website</p>
-  <p>Student demonstration project — not an official company website.</p>
-</footer>
+<script>
+const canvas = document.getElementById("network");
+const ctx = canvas.getContext("2d");
+
+let width, height, particles;
+let animationFrame;
+
+function setupCanvas() {
+    const area = canvas.parentElement;
+    const rect = area.getBoundingClientRect();
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = rect.width;
+    height = rect.height;
+
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    const number = Math.min(65, Math.max(25, Math.floor(width / 10)));
+
+    particles = Array.from({ length: number }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35
+    }));
+}
+
+function animateNetwork() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        for (let j = i + 1; j < particles.length; j++) {
+            const q = particles[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 95) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle =
+                    "rgba(32,220,232," + (1 - distance / 95) * 0.22 + ")";
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+            }
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.3, 0, Math.PI * 2);
+        ctx.fillStyle = "#20dce899";
+        ctx.fill();
+    });
+
+    animationFrame = requestAnimationFrame(animateNetwork);
+}
+
+function startAnimation() {
+    cancelAnimationFrame(animationFrame);
+    setupCanvas();
+    animateNetwork();
+}
+
+startAnimation();
+
+window.addEventListener("resize", startAnimation);
+</script>
 
 </body>
 </html>
-
